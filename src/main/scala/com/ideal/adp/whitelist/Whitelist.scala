@@ -1,6 +1,6 @@
 package com.ideal.adp.whitelist
 
-import com.ideal.adp.whitelist.account.AccountType
+import com.ideal.adp.whitelist.account.{AccountResolver, AccountType}
 import com.ideal.adp.whitelist.account.AccountType.AccountType
 import com.ideal.adp.whitelist.Field.Field
 import com.ideal.adp.whitelist.LogicDefine.Logic
@@ -156,4 +156,18 @@ object Whitelist {
     def terminalWhitelist(ruleId: String, accountType: AccountType, field: Field, url: String, generator: LogicDefine.LogicGenerator): Boolean =
         terminalWhitelist(ruleId, accountType, field, url, generator, true)
 
+    def main(args: Array[String]): Unit = {
+        def parserCookie(cookie: String) = Utilities.string2Map(cookie, "; ", "=")
+        def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
+
+        val url = "www.51tv.com/crrvr?deviceId={ \"firstName\":\"Bill\" , \"im\":\"860000000000000\" }&cevcr=44rre&zz=860000000000000"
+        val rawCookie = "yyuid=a%7c%e6%9f%a5%e6%9f%a5%7c%e4%bd%a0%e5%a5%bd; alpin=ooooo"
+        new BaseLibrary(AccountType.NETWORK).load()
+
+        val r = new AccountResolver(Whitelist.cache).resolve(url, Some(rawCookie), parserCookie, UriParser.getQuery(Some(url)), parseQuery)
+        r match {
+            case None => None
+            case (Some(track)) => println(track)
+        }
+    }
 }
