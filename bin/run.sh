@@ -17,7 +17,8 @@ function package(){
 
 #传入要运行的包名类名，执行程序
 function execute() {
- scala -cp ${base_path}/${project_name}/target/adp-whitelist-1.0-SNAPSHOT/lib/*:. com.ideal.adp.whitelist.xx
+ class=$1
+ scala -cp ${base_path}/${project_name}/target/adp-whitelist-1.0-SNAPSHOT/lib/*:. ${class}
 }
 
 #发布到spark客户端
@@ -25,18 +26,19 @@ function deploy() {
  
 }
 
-#程序入口 传入参数 <package> 进行打包;传入参数 <execute> 进行测试;<deploy> 发布到指定路径
+#程序入口 传入参数 <package> 进行打包;传入参数 <execute> <class>进行测试;<deploy> 发布到指定路径
 case $1 in
  package)
   package
  ;;
  execute)
-  execute
+  shift
+  execute $1
  ;;
  deploy)
   deploy
  ;;
  *)
- 	echo "Usage: sh $0 <package> | <execute> | <deploy>"
+ 	echo "Usage: sh $0 <package> | <execute> <class> | <deploy>"
  ;;
 esac
