@@ -14,7 +14,13 @@ class NetworkWhitelistSuite extends FunSuite with BeforeAndAfter {
     var url: String = _
     var rawCookie: String = _
     var cache: Option[mutable.Map[String, mutable.Map[String, mutable.Set[(Logic, AccountType)]]]] = _
-    private def parserCookie(cookie: String) = Utilities.string2Map(cookie, "; ", "=")
+    private def parserCookie(cookie: String) = {
+        val res = mutable.Map[String, String]()
+        for(x <- cookie.split(";"); parts = x.split("=", 2); if(parts.length == 2)) {
+            res += (parts(0).trim -> parts(1))
+        }
+        res
+    }
     private def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
     before {

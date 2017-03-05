@@ -157,7 +157,13 @@ object Whitelist {
         terminalWhitelist(ruleId, accountType, field, url, generator, true)
 
     def main(args: Array[String]): Unit = {
-        def parserCookie(cookie: String) = Utilities.string2Map(cookie, "; ", "=")
+        def parserCookie(cookie: String) = {
+            val res = mutable.Map[String, String]()
+            for(x <- cookie.split(";"); parts = x.split("=", 2); if(parts.length == 2)) {
+                res += (parts(0).trim -> parts(1))
+            }
+            res
+        }
         def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
         val url = "www.51tv.com/crrvr?deviceId={ \"firstName\":\"Bill\" , \"im\":\"860000000000000\" }&cevcr=44rre&zz=860000000000000"
