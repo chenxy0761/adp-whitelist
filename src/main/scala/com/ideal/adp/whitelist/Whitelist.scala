@@ -122,7 +122,15 @@ object Whitelist {
               "please validate the AccountType.")
         }
 
-        // logic动态改写
+        // logic动态追加
+        accountType match {
+            case AccountType.MDN => generator regexStrict()
+            case AccountType.IMEI => generator format(AccountType.IMEI)
+            case AccountType.IDFA => generator format(AccountType.IDFA)
+            case AccountType.MAC => generator format(AccountType.MAC)
+        }
+
+        // logic动态修改
         val logicX = if(generator.logic.isEmpty) throw new IllegalArgumentException("Internal error: logic is null " +
           "while retrieving the ruleId = [" + ruleId + "], url = [" + url + "].") else
             for(x <- generator.logic) yield {
@@ -135,7 +143,7 @@ object Whitelist {
                         (MethodType.LIB_REGEX, regexet)
                     }
                     case (MethodType.LIB_REGEX_STRICT, _, acType) => {
-                        println("hahaha" + acType.toString)
+                        // println("hahaha" + acType.toString)
                         val regexet = TerminalRegex.find(acType) match {
                             case None => throw new IllegalArgumentException("Internal error: Cannot find the regex for the type:" + acType.toString)
                             case Some(r) => r

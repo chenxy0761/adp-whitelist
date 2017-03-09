@@ -4,6 +4,8 @@ import java.net.{URLDecoder, URLEncoder}
 
 import com.ideal.adp.whitelist.tool.Utilities
 import com.ideal.adp.whitelist.LogicDefine.Logic
+import com.ideal.adp.whitelist.account.AccountType
+import com.ideal.adp.whitelist.account.AccountType.AccountType
 
 import scala.collection.mutable
 import scala.util.matching.Regex
@@ -42,7 +44,7 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
                         try {
                             Some(URLDecoder.decode(dt, "utf-8"))
                         } catch {
-                            case ex: Exception => None
+                            case ex: Exception => Some(dt)
                         }
                     case (MethodType.LIB_URLENCODE, None, dt: String) => currentData = {
                         try {
@@ -83,6 +85,50 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
                         }
                         if(mm.isEmpty) None else Some(mm)
                     }
+                    case (MethodType.LIB_LOWER_CASE, None, dt: String) => currentData = Some(dt.toLowerCase())
+                    case (MethodType.LIB_LEN, lens: Tuple2[Int, Int], dt: String) => currentData =
+                        if(dt.length >= lens._1 && dt.length <= lens._2) Some(dt) else None
+                    case (MethodType.LIB_SUBSTRING, tmp: Tuple2[Int, Int], dt: String) => currentData = {
+                        if(tmp._1 >= 0 && dt.length >= tmp._1 + tmp._2 + 1) Some(dt.substring(tmp._1, tmp._1 + tmp._2 + 1))
+                        else if(tmp._1 < 0 && dt.length >= Math.abs(tmp._1) + tmp._2) Some(dt.substring(dt.length - Math.abs(tmp._1) - tmp._2 + 1, dt.length - Math.abs(tmp._1) + 1))
+                        else None
+                    }
+                    case (MethodType.LIB_REVERSE, None, dt: String) => currentData = Some(dt.reverse)
+                    case (MethodType.LIB_CONTAINS, key: String, dt: String) => currentData = Some(dt.contains(key))
+
+                    // 1.判断[长度15位 10进制；长度14位 16进制]
+                    // 2.转小写
+                    case (MethodType.LIB_FORMAT, AccountType.IMEI, dt: String) => currentData = {
+                        if(dt.length == 14 && Utilities.isHexNumber(dt)) Some(dt.toLowerCase)
+                        else if(dt.length == 15 && Utilities.isOctNumber(dt)) Some(dt.toLowerCase)
+                        else None
+                    }
+
+                    case (MethodType.LIB_FORMAT, AccountType.MAC, dt: String) => currentData = {
+                        val dtx = if(dt.contains("%")) {
+                            val tmp = try {
+                                Some(URLDecoder.decode(dt, "utf-8"))
+                            } catch {
+                                case ex: Exception => None
+                            }
+                            tmp match {
+                                case None => None
+                                case Some(d) => if(d.length != 17) None else Some(d)
+                            }
+                        } else Some(dt)
+                        val dtx2 = dtx match {
+                            case None => None
+                            case Some(d) => if(d.length == 17) Some(d.replaceAll("[" + d.charAt(2) + "]", "")) else Some(d)
+                        }
+                        dtx2 match {
+                            case None => None
+                            case Some(d) => if(d.length == 12 && Utilities.isHexNumber(d)) Some(d.toLowerCase) else None
+                        }
+                    }
+
+                    case (MethodType.LIB_FORMAT, AccountType.IDFA, dt: String) => currentData = if(dt.length == 36) Some(dt.toLowerCase) else None
+                    case (MethodType.LIB_FORMAT, AccountType.ANDROIDID, dt: String) => currentData = Some(dt.toLowerCase)
+                    // case (MethodType.LIB_FORMAT, AccountType.MDN, dt: String) => currentData =
                     case _ => throw new IllegalArgumentException("Not the valid method type! Its info: MethodType=" + methodType + ", givenConference=" + c + ", currentData=" + curData)
                 }
             }

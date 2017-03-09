@@ -24,7 +24,7 @@ class NetworkWhitelistSuite extends FunSuite with BeforeAndAfter {
     private def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
     before {
-        url = "www.51tv.com/crrvr?deviceId=860000000000000&cevcr=44rre&zz=860000000000000"
+        url = "www.51tv.com/crrvr?deviceId=860000FE0000000&cevcr=44rre&zz=0A.00.00.00.00.00"
         rawCookie = "yyuid=a%7c%e6%9f%a5%e6%9f%a5%7c%e4%bd%a0%e5%a5%bd; alpin=ooooo"
         new BaseLibrary(AccountType.NETWORK).load()
         // cache = Whitelist.cache.get(Field.Cookie)

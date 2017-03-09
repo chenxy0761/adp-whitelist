@@ -115,4 +115,8 @@ object Utilities {
         }
     }
 
+    def isOctNumber(str: String) = !str.exists(x => x < 48 || x > 57)
+
+    def isHexNumber(str: String) = !str.exists(x => x < 48 || x > 103 || (x > 57 && x < 65) || (x > 70 && x < 97))
+
 }
