@@ -7,7 +7,8 @@ import com.ideal.adp.whitelist.account.AccountType.AccountType
 object MethodType extends Enumeration {
     type MethodType = Value
     val LIB_FEATURE, LIB_FIND, LIB_FILTER, LIB_URLDECODE, LIB_URLENCODE, LIB_REGEX, LIB_REGEX_STRICT, LIB_SPLIT, LIB_SPLIT_COMFORT, LIB_REPLACE,
-    LIB_STRING_TO_MAP, LIB_JSON_TO_MAP,
+    LIB_STRING_TO_MAP, LIB_JSON_TO_MAP, LIB_LOWER_CASE, LIB_LEN, LIB_SUBSTRING, LIB_REVERSE, LIB_CONTAINS,
+    LIB_FORMAT,
     CUSTOM = Value
 }
 

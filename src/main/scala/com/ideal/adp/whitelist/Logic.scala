@@ -1,6 +1,7 @@
 package com.ideal.adp.whitelist
 
 import MethodType.MethodType
+import com.ideal.adp.whitelist.account.AccountType.AccountType
 
 import scala.collection.mutable.ListBuffer
 import scala.util.matching.Regex
@@ -13,7 +14,7 @@ object LogicDefine {
     def multiLogicGenerator() = new MultiLogicGenerator()
 
     class LogicGenerator(private var rules: Logic) {
-        var logic = if(rules.isEmpty) List() else rules // Can be acquired logic from the out-side
+        var logic = if(rules.isEmpty) List() else rules // Logic can be acquired from the outside
 
         private def add (ag: Logic, methodType: MethodType, unknown: => Any): Logic =
             if (ag.isEmpty) ((methodType, unknown) :: ag) else ag.head :: add(ag.tail, methodType, unknown)
@@ -43,7 +44,12 @@ object LogicDefine {
         def replace(oldSub: String, newSub: String) = insert(MethodType.LIB_REPLACE, (oldSub, newSub))
         def stringToMap(sep1: String, sep2: String) = insert(MethodType.LIB_STRING_TO_MAP, (sep1, sep2))
         def jsonToMap() = insert(MethodType.LIB_JSON_TO_MAP, None)
-
+        def toLowerCase() = insert(MethodType.LIB_FIND, None)
+        def len(min: Int, max: Int) = insert(MethodType.LIB_FIND, (min, max))
+        def subStringX(index: Int, len: Int) = insert(MethodType.LIB_SUBSTRING, (index, len))
+        def reverse() = insert(MethodType.LIB_REVERSE, None)
+        def contains(key: String) = insert(MethodType.LIB_CONTAINS, key)
+        def format(acType: AccountType) = insert(MethodType.LIB_FORMAT, acType)
         def release() = logic = Nil
 
     }
