@@ -1,7 +1,7 @@
 package com.ideal.adp.whitelist
 
 import com.ideal.adp.whitelist.account.AccountType
-import com.ideal.adp.whitelist.detail.Tmp
+import com.ideal.adp.whitelist.detail._
 import com.ideal.adp.whitelist.account.AccountType.AccountType
 
 object MethodType extends Enumeration {
@@ -27,7 +27,7 @@ object TerminalRegex {
 
 class BaseLibrary(accountType: AccountType*) {
     def load(): Unit = {
-/*        new AutoHome().load()
+        new AutoHome().load()
         new Baidu().load()
         new Bairong().load()
         new Behe().load()
@@ -55,7 +55,7 @@ class BaseLibrary(accountType: AccountType*) {
         new Vip().load()
         new YHD().load()
         new Youku().load()
-        new YY().load()*/
+        new YY().load()
         new Tmp().load()
     }
 }

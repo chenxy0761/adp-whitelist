@@ -1,6 +1,8 @@
 package com.ideal.adp.whitelist.detail
 
+import com.ideal.adp.whitelist.Field
 import com.ideal.adp.whitelist.Whitelist._
+import com.ideal.adp.whitelist.account.AccountType
 
 class Taobao extends LogicGenerable {
     override def load(): Unit = {
@@ -17,6 +19,10 @@ class Taobao extends LogicGenerable {
 
         // 网盟账号
         networkWhitelist("id52", "m3guo.com", gen feature("CNZZDATA1594368") stringToMap("&", "=") find("cnzz_eid"))
+
+        terminalWhitelist("-1032151963", AccountType.MAC, Field.Url, "strip.taobaocdn.com", gen feature("ps_id"))
+        terminalWhitelist("-1107478357", AccountType.IMEI, Field.Url, "w.m.taobao.com", gen feature("device_id"))
+
     }
 
     /**

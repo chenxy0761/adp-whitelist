@@ -1,6 +1,8 @@
 package com.ideal.adp.whitelist.detail
 
+import com.ideal.adp.whitelist.Field
 import com.ideal.adp.whitelist.Whitelist._
+import com.ideal.adp.whitelist.account.AccountType
 
 class Sina extends LogicGenerable {
     override def load(): Unit = {
@@ -14,6 +16,9 @@ class Sina extends LogicGenerable {
         networkWhitelist("id33", urls, gen feature("subp"))
         networkWhitelist("id34", urls, gen feature("myuid"))
         networkWhitelist("id30", urls, gen feature("un"))
+
+        terminalWhitelist("1125702080", AccountType.IMEI, Field.Url, "newsapi.sina.cn", gen feature("imei"))
+
     }
 
 /*    def processSupNick(cookie: String) = processSup(cookie, "nick")

@@ -166,8 +166,8 @@ object Whitelist {
         }
         def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
-        val url = "www.51tv.com/crrvr?deviceId={ \"firstName\":\"Bill\" , \"im\":\"860000000000000\" }&cevcr=44rre&zz=860000000000000"
-        val rawCookie = "yyuid=a%7c%e6%9f%a5%e6%9f%a5%7c%e4%bd%a0%e5%a5%bd; alpin=ooooo"
+        val url = "ark.letv.com?a=b"
+        val rawCookie = "loginnamecookie=02165698904; name=jason"
         new BaseLibrary(AccountType.NETWORK).load()
 
         val r = new AccountResolver(Whitelist.cache).resolve(url, Some(rawCookie), parserCookie, UriParser.getQuery(Some(url)), parseQuery)

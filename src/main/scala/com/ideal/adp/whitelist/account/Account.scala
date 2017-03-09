@@ -5,7 +5,7 @@ import AccountType.AccountType
 object AccountType extends Enumeration with Serializable {
     type AccountType = Value
     val NETWORK,
-        IMEI, IMSI, MDN, ANDROIDID, IDFA, MAC,
+        IMEI, IMSI, MDN, ANDROIDID, IDFA, MAC, EMAIL,
         AUDIT,
         RETAIN = Value
 }

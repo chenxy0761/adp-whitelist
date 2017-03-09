@@ -1,6 +1,8 @@
 package com.ideal.adp.whitelist.detail
 
+import com.ideal.adp.whitelist.Field
 import com.ideal.adp.whitelist.Whitelist._
+import com.ideal.adp.whitelist.account.AccountType
 
 class YHD extends LogicGenerable {
     override def load(): Unit = {
@@ -10,6 +12,9 @@ class YHD extends LogicGenerable {
         networkWhitelist("id13", url, gen feature("global_user_machine_sign-key"))
         networkWhitelist("id14", url, gens feature(Array("global_user_sign", "guid")))
         networkWhitelist("id15", url, gen feature("ac") urlDecode())
+
+        terminalWhitelist("1036919497", AccountType.MDN, Field.Cookie, "tracker.yhd.com", gen feature("ac"))
+
     }
 
     // Terminal load ...

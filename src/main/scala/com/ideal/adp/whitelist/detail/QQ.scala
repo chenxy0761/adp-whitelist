@@ -1,6 +1,8 @@
 package com.ideal.adp.whitelist.detail
 
+import com.ideal.adp.whitelist.Field
 import com.ideal.adp.whitelist.Whitelist._
+import com.ideal.adp.whitelist.account.AccountType
 
 class QQ extends LogicGenerable {
     override def load(): Unit = {
@@ -21,6 +23,14 @@ class QQ extends LogicGenerable {
         networkWhitelist("id5", urls2, gen feature("o_cookie") replace("%20", "") replace(" ", "") split("@", 0))
         networkWhitelist("id20", urls2, gens feature(Array("pt2gguin", "ptui_loginuin")) replace("%20", "") replace(" ", "") split("@", 0))
         networkWhitelist("id43", urls2, gen feature("qqmail_alias") split(";", 0))
+
+        terminalWhitelist("1002337215", AccountType.IMEI, Field.Url, "w.inews.qq.com", gen feature("devid"))
+        terminalWhitelist("1057529556", AccountType.IMEI, Field.Url, "r.cnews.qq.com", gen feature("devid"))
+        terminalWhitelist("1103660724", AccountType.MAC, Field.Url, "mcgi.v.qq.com", gen feature("mac"))
+        terminalWhitelist("-1104344824", AccountType.IMEI, Field.Cookie, "c.isdspeed.qq.com", gen feature("imei"))
+        terminalWhitelist("1107009462", AccountType.IDFA, Field.Url, "mcgi.v.qq.com", gen feature("idfa"))
+        terminalWhitelist("1141876332", AccountType.IMEI, Field.Url, "xwapp.auto.qq.com", gen feature("devid") )
+        terminalWhitelist("-1160544028", AccountType.ANDROIDID, Field.Url, "upmobile.v.qq.com", gen feature("device_id") )
     }
 
     def formatQQCookie(given: String) = {
