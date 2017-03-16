@@ -28,7 +28,7 @@ object TerminalRegex {
 
 class BaseLibrary(accountType: AccountType*) {
     def load(): Unit = {
-        new AutoHome().load()
+        /*new AutoHome().load()
         new Baidu().load()
         new Bairong().load()
         new Behe().load()
@@ -57,6 +57,7 @@ class BaseLibrary(accountType: AccountType*) {
         new YHD().load()
         new Youku().load()
         new YY().load()
-        new Tmp().load()
+        new Tmp().load()*/
+        new Temp().load()
     }
 }

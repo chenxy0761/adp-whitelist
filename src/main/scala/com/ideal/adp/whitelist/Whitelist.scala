@@ -124,7 +124,7 @@ object Whitelist {
 
         // logic动态追加
         accountType match {
-            case AccountType.MDN => generator regexStrict()
+            case AccountType.MDN => generator// regexStrict()
             case AccountType.IMEI => generator format(AccountType.IMEI)
             case AccountType.IDFA => generator format(AccountType.IDFA)
             case AccountType.MAC => generator format(AccountType.MAC)
@@ -175,7 +175,7 @@ object Whitelist {
         }
         def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
-        val url = "ark.letv.com?a=b"
+        val url = "http://api.diditaxi.com.cn/api/v2/p_cidcollector?networkType=WIFI&model=SM-A7000&phone=13524615757&userlng=116.279297&app_type=1&appversion=5.0.9&mac=a8%3A9f%3Aba%3A30%3A85%3A11&cancel=test110f24ef9c425c88ec37462e018a464f&lng=116.279297&lang=zh-CN&suuid=A37000E88AEB928929C5333AC503413C_789&android_id=75ba931a3cfaed4a&time=1489111872830&token=U8O5mgwH8b-T8e1yxDZL5G9XcLVZmWP1UKPoDeRbmSRUjU2ugzAMBu_yrb14dkjC4zJVFKyCxE9FkkWFuHtNd12NbY01J1qbRwwA4TtIL-wlRicSuv9AOPZFMTAhPY1CWLVO-1gwnCirgTvvgsnOEcrejmza30XIh6aqjzqv-itlXRYrsvPSBfbRR4vnKW2b3nfh3vYx1VTfr_v1-gQAAP__&lat=39.995008&vcode=197&os=4.4.4&dviceid=d39a06b58e9b11af22b1f3bd7feb170d&imei=3570920657228418A497DC9CE60264699BB3CDD04A2C62E&userlat=39.995008&cpu=processor%3A%200&brand_id=d%2F%2FigwEhgBGCI2TG6lWqlAMOe1RafTfyZN5BSl7xcUJM%2F0g34NRe2ybx0tTQoINm32DtoAyRdyWnCIgLNP9U2JLOM3HYxF14um4cuqZm2Yo%3D&maptype=soso&pixels=1080*1920&cid=602455f2e3492046d57d88a574f15dd7&brand=samsung&uuid=B2BF36C9EE57F97ABAF5BCFDE96F6C09&datatype=1&channel=38&sig=9e623cbd4b03089a81eea85bdeedb6047bd8ca5c"
         val rawCookie = "loginnamecookie=02165698904; name=jason"
         new BaseLibrary(AccountType.NETWORK).load()
 

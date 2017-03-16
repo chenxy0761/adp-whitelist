@@ -10,5 +10,6 @@ import com.ideal.adp.whitelist.account.AccountType
 class Suning extends LogicGenerable{
   override def load(): Unit = {
     terminalWhitelist("-1049333696", AccountType.MDN, Field.Url, "click.suning.cn", gen feature("ids") split("\\|", 0) regex())
+    terminalWhitelist("-1182215947", AccountType.MDN, Field.Cookie, "ju.suning.com", gen feature("idsLoginUserIdLastTime") regex())
   }
 }
