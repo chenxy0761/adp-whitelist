@@ -14,7 +14,7 @@ class Tmp extends LogicGenerable {
         networkWhitelist("id136", url, gen feature("AHeadUserInfo") stringToMap("&", "=") find("UserName"))
         networkWhitelist("id136", url, gen feature("CtripUserInfo") stringToMap("&", "=") find("UserName"))*/
 
-        terminalWhitelist("tid33", AccountType.MAC, Field.Url, url, gen feature("deviceId") jsonToMap() find("im")) //
+        terminalWhitelist("tid33", AccountType.MAC, Field.Url, url, gen feature("deviceId")) //
         terminalWhitelist("tid34", AccountType.MAC, Field.Url, url, gen feature("zz") filter("000000000000000")) //
 
     }
