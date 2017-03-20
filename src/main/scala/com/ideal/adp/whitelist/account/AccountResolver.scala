@@ -51,12 +51,20 @@ class AccountResolver(ruleDb: mutable.Map[Field, mutable.Map[String, mutable.Map
                 // val acId = e._2._2
                 // val ruleIdX = e._2._3
                 track.use(e._2)
-                val r = new Simulation(raw, kvFunction, e._1).run()
+                val r = try {
+                    new Simulation(raw, kvFunction, e._1).run()
+                } catch {
+                    case ex: IllegalArgumentException => {
+                        throw new RuntimeException("resolve data error while using the ruleid = " + e._2._3 + ", data = " + raw, ex)
+                    }
+                    case e: Exception => throw e
+                }
                 if ( r == null) None else if (r.isInstanceOf[String]) {
-                    val ruleIdx = e._2._3
-                    track.success(ruleIdx, r.asInstanceOf[String])
-                    // Utilities.addToCountMap(res, Account.account(acId, acType, r.asInstanceOf[String]), 1)
+                        val ruleIdx = e._2._3
+                        track.success(ruleIdx, r.asInstanceOf[String])
+                        // Utilities.addToCountMap(res, Account.account(acId, acType, r.asInstanceOf[String]), 1)
                 } else None
+
             })
         }
 

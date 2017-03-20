@@ -37,8 +37,8 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
                     }
                     // speed up the feature-finding process
                     case (MethodType.LIB_FEATURE, key: String, dt: String) => currentData = if (! dt.contains(key)) None else kvFunc(dt).get(key)
-                    case (MethodType.LIB_FIND, key: String, dt: mutable.Map[String, String]) => currentData = dt.get(key)
-                    case (MethodType.LIB_FIND, key: String, dt: Map[String, String]) => currentData = dt.get(key)
+                    case (MethodType.LIB_FIND, key: String, dt: mutable.Map[String, Any]) => currentData = dt.get(key)
+                    case (MethodType.LIB_FIND, key: String, dt: Map[String, Any]) => currentData = dt.get(key)
                     case (MethodType.LIB_FILTER, key: String, dt: String) => currentData = if(dt == key) None else Some(dt)
                     case (MethodType.LIB_URLDECODE, None, dt: String) => currentData =
                         try {
@@ -55,12 +55,12 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
                     }
                     case (MethodType.LIB_REGEX, regexet: Tuple2[Regex, Int], dt: String) => {
                         val mask = regexet._1.findAllIn(dt).toArray
-                        currentData = if(mask.isEmpty) None else if (mask.size == 1) Some(mask(0)) else Some(mask)
+                        currentData = if(mask.isEmpty) None /*else if (mask.size == 1) Some(mask(0))*/ else Some(mask(0))
                     }
                     case (MethodType.LIB_REGEX_STRICT, regexet: Tuple2[Regex, Int], dt: String) => {
                         currentData = if(regexet._2 != dt.length) None else {
                             val mask = regexet._1.findAllIn(dt).toArray
-                            if(mask.isEmpty) None else if (mask.size == 1) Some(mask(0)) else Some(mask)
+                            if(mask.isEmpty) None /*else if (mask.size == 1) Some(mask(0))*/ else Some(mask(0))
                         }
                     }
                     case (MethodType.LIB_SPLIT, delimext: Tuple3[String, Int, Int], dt: String) => {
@@ -130,7 +130,7 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
                     case (MethodType.LIB_FORMAT, AccountType.IDFA, dt: String) => currentData = if(dt.length == 36) Some(dt.toLowerCase) else None
                     case (MethodType.LIB_FORMAT, AccountType.ANDROIDID, dt: String) => currentData = if(dt.length >=10 && dt.length <=40) Some(dt.toLowerCase) else None
                     // case (MethodType.LIB_FORMAT, AccountType.MDN, dt: String) => currentData =
-                    case _ => throw new IllegalArgumentException("Not the valid method type! Its info: MethodType=" + methodType + ", givenConference=" + c + ", currentData=" + curData)
+                    case _ => throw new IllegalArgumentException("Not the valid method type! Its info: MethodType=" + methodType + ", givenConference=" + c + ", currentData=" + curData.toString)
                 }
             }
             currentData

@@ -9,6 +9,6 @@ import com.ideal.adp.whitelist.account.AccountType
  */
 class Bankcomm extends LogicGenerable{
   override def load(): Unit = {
-    terminalWhitelist("1074419789", AccountType.MDN, Field.Url, "creditcard.bankcomm.com", gen feature("mobile"))
+    terminalWhitelist("1074419789", AccountType.MDN, Field.Url, "creditcard.bankcomm.com", gen feature("mobile") regex())
   }
 }

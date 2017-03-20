@@ -8,10 +8,8 @@ import com.ideal.adp.whitelist.account.AccountType
  */
 class Temp extends LogicGenerable{
   override def load(): Unit = {
-
-    //需要写方法
-    //terminalWhitelist("-1208063143", AccountType.MAC, Field.Url, "api.m.taobao.com", gen feature("data") urlDecode() jsonToMap())
-    //terminalWhitelist("-1267138300", AccountType.IMEI, Field.Url, "platform.sina.com.cn", gen feature("pdps_params") )
+    terminalWhitelist("-1208063143", AccountType.MAC, Field.Url, "api.m.taobao.com", gen feature("data") urlDecode() jsonToMap() find("c4"))
+    terminalWhitelist("-1267138300", AccountType.IMEI, Field.Url, "platform.sina.com.cn", gen feature("pdps_params") urlDecode() jsonToMap() find("app") jsonToMap() find("device_id"))
     //完整
     terminalWhitelist("-1182215947", AccountType.MDN, Field.Cookie, "ju.suning.com", gen feature("idsLoginUserIdLastTime") regex())
     terminalWhitelist("-1192586425", AccountType.IMEI, Field.Url, "iface2.iqiyi.com", gen feature("cupid_id") )
@@ -110,6 +108,7 @@ class Temp extends LogicGenerable{
     terminalWhitelist("-181050644", AccountType.ANDROIDID, Field.Url, "irs01.com?hvt", gen feature("androidid") notContains("%"))
     terminalWhitelist("-1813271916", AccountType.ANDROIDID, Field.Url, "qq.irs01.com", gen feature("androidid") notContains("%"))
     //mac
+    terminalWhitelist("-585078399", AccountType.MAC, Field.Url, "ai1.pub.funshion.com", gen feature("mac") )
     terminalWhitelist("-1495956879", AccountType.MAC, Field.Url, "m.baidu.com", gen feature("clientmac") )
     terminalWhitelist("-1518292626", AccountType.MAC, Field.Url, "cdn.exands.com", gen feature("mac") )
     terminalWhitelist("1574151598", AccountType.MAC, Field.Url, "aa1.pub.funshion.com", gen feature("mac") )
@@ -495,6 +494,9 @@ class Temp extends LogicGenerable{
     terminalWhitelist("585300956", AccountType.IDFA, Field.Url, "iface2.iqiyi.com", gen feature("device_id") notContains("%"))
     terminalWhitelist("-700361178", AccountType.IDFA, Field.Url, "irs01.com", gen feature("idfa") notContains("%"))
     //mdn
+    terminalWhitelist("244102856", AccountType.MDN, Field.Url, "apis.dianhua.cn", gen feature("tel") regex())
+    terminalWhitelist("1682908155", AccountType.MDN, Field.Cookie, "user-mobile.youku.com", gen feature("k") regex())
+    terminalWhitelist("191439749", AccountType.MDN, Field.Cookie, "user-mobile.youku.com", gen feature("u") regex())
     terminalWhitelist("-1345609291", AccountType.MDN, Field.Url, "as.xiaojukeji.com", gen feature("phone") regex())
     terminalWhitelist("1476998758", AccountType.MDN, Field.Url, "114.80.165.113", gen feature("phoneno") regex())
     terminalWhitelist("1566887076", AccountType.MDN, Field.Cookie, "i.meituan.com", gen feature("h_cookie_phone") regex())

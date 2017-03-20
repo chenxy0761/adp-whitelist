@@ -58,6 +58,8 @@ class BaseLibrary(accountType: AccountType*) {
         new Youku().load()
         new YY().load()
         new Tmp().load()*/
-        new Temp().load()
+        //new Temp().load()
+        //new SelFunc().load()
+        new Temp2().load()
     }
 }
