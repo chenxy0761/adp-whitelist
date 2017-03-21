@@ -92,6 +92,16 @@ object Utilities {
         }
     }
 
+    def addToCountMap[T](data: mutable.Map[T, Long], key: T, count: Long): Unit = {
+        if(data == null) {
+            throw new IllegalArgumentException("Cannot add element into an empty collection.")
+        }
+        data.get(key) match {
+            case None => data += (key -> count)
+            case Some(x) => data.put(key, x + count)
+        }
+    }
+
     /**
       * 非原地操作，原始数据不变
       * @param data1
