@@ -24,7 +24,7 @@ class NetworkWhitelistSuite extends FunSuite with BeforeAndAfter {
     private def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
     before {
-        url = "item.jd.com/crrvr?client=android&pin=18999999999&zz=0A.00.00.00.00.00"
+        url = "api.m.taobao.com/crrvr?ttid=android%40umeng&t=1488927237&imei=umeng&appKey=umeng%3A521add8956240b94130047c2&v=4.0&sign=ebb02e6a3329be358e069b0df5ff3895&data=%7B%22new_device%22%3A%22true%22%2C%22old_device_id%22%3A%22ApANLhG7x3ZOofTTV3fwgEjsGbB6aKDkoxvvXguFYTdT%22%2C%22c1%22%3A%22Lenovo+A320    t%22%2C%22c2%22%3A%22umeng%22%2C%22device_global_id%22%3A%22Vs7YD5UMdXQDAES3wsPo18tN%22%2C%22c0%22%3A%22Lenovo%22%2C%22c6%22%3A%22350f7f27e685e967%22%2C%22package_name%22%3A%22com.ziipin.homeinn%22%2C%22c5%22%3A%220123456789ABCDEF%22%2C%22app_version%22%3A%225.8%22%2C%22sdk_version%22%3A20160215%2C%22c4%22%3Anull%2C%22c3%22%3A%22umeng%22%7D&api=mtop.push.device.createAndRegister&imsi=umeng"
         rawCookie = "client=android; =a%7c%e6%9f%a5%e6%9f%a5%7c%e4%bd%a0%e5%a5%bd; pin=18999999999"
         new BaseLibrary(AccountType.NETWORK).load()
         // cache = Whitelist.cache.get(Field.Cookie)

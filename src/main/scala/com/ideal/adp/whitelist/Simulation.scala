@@ -25,6 +25,7 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
             for( (methodType, c) <- logic; if (currentData.isDefined)) {
                 val curData = currentData.get
                 (methodType, c, curData) match {
+                    case (_, _, null) => currentData = None
                     case (MethodType.CUSTOM, func: (Any => Option[Any]), dt: Any) => {
                         try {
                             currentData = func(dt)
@@ -130,7 +131,7 @@ class Simulation(raw: String, kvFunction: (String => mutable.Map[String, String]
                     case (MethodType.LIB_FORMAT, AccountType.IDFA, dt: String) => currentData = if(dt.length == 36) Some(dt.toLowerCase) else None
                     case (MethodType.LIB_FORMAT, AccountType.ANDROIDID, dt: String) => currentData = if(dt.length >=10 && dt.length <=40) Some(dt.toLowerCase) else None
                     // case (MethodType.LIB_FORMAT, AccountType.MDN, dt: String) => currentData =
-                    case _ => throw new IllegalArgumentException("Not the valid method type! Its info: MethodType=" + methodType + ", givenConference=" + c + ", currentData=" + curData.toString)
+                    case _ => throw new IllegalArgumentException("Not the valid method type! Its info: MethodType=" + methodType + ", givenConference=" + c + ", currentData=" + curData)
                 }
             }
             currentData
