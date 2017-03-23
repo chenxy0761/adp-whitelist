@@ -59,7 +59,7 @@ class AccountResolver(ruleDb: mutable.Map[Field, mutable.Map[String, mutable.Map
                     }
                     case e: Exception => throw e
                 }
-                if ( r == null) None else if (r.isInstanceOf[String]) {
+                if (r == null ) None else if (r.isInstanceOf[String]) {
                         val ruleIdx = e._2._3
                         track.success(ruleIdx, r.asInstanceOf[String])
                         // Utilities.addToCountMap(res, Account.account(acId, acType, r.asInstanceOf[String]), 1)
@@ -73,7 +73,7 @@ class AccountResolver(ruleDb: mutable.Map[Field, mutable.Map[String, mutable.Map
     }
 
     def resolve(url: String, rawCookie: Option[String], parseCookie: (String => mutable.Map[String, String]), rawQuery: Option[String], parseQuery: (String => mutable.Map[String, String])): Option[TerminalTrack] = {
-        val track = new Track()
+        // val track = new Track()
         UriParser.getDomain(Some(url)) match {
             case None => None
             case Some(domain) => {
@@ -157,8 +157,20 @@ class TerminalTrack extends Serializable {
         tr
     }
 
+    // 本方法可以用于判断：当前的一条记录是否有dubious的resolve_attempt发生
+    def isEmpty = _data.isEmpty
+
     override def toString: String = {
-        if(_data.isEmpty) "Empty\n" else _data.map(x => {
+        if(isEmpty) "Empty\n" else _data.map(x => {
+            if(x._2._1)
+                "%s\t%s\t%s".format(x._1, x._2._2.toString, x._2._3) // <ruleid, type, value>
+            else
+                "%s\t%s".format(x._1, x._2._2.toString) // <ruleid, type>
+        }).mkString(";")
+    }
+
+    def result: String = {
+        if(isEmpty) "Empty\n" else _data.map(x => {
             if(x._2._1)
                 "successed ruleid: %s, type: %s, value: %s".format(x._1, x._2._2.toString, x._2._3)
             else
