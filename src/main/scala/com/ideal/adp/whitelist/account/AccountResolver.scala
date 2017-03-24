@@ -161,11 +161,11 @@ class TerminalTrack extends Serializable {
     def isEmpty = _data.isEmpty
 
     override def toString: String = {
-        if(isEmpty) "Empty\n" else _data.map(x => {
+        if(isEmpty) "Empty" else _data.map(x => {
             if(x._2._1)
-                "%s\t%s\t%s".format(x._1, x._2._2.toString, x._2._3) // <ruleid, type, value>
+                "%s,%s,%s".format(x._1, x._2._2.toString, x._2._3) // <ruleid, type, value>
             else
-                "%s\t%s".format(x._1, x._2._2.toString) // <ruleid, type>
+                "%s,%s".format(x._1, x._2._2.toString) // <ruleid, type>
         }).mkString(";")
     }
 

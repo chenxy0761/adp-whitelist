@@ -24,8 +24,8 @@ class NetworkWhitelistSuite extends FunSuite with BeforeAndAfter {
     private def parseQuery(query: String) = Utilities.string2Map(query, "&", "=")
 
     before {
-        url = "api.m.taobao.com/crrvr?ttid=android%40umeng&t=1488927237&imei=umeng&appKey=umeng%3A521add8956240b94130047c2&v=4.0&sign=ebb02e6a3329be358e069b0df5ff3895&data=%7B%22new_device%22%3A%22true%22%2C%22old_device_id%22%3A%22ApANLhG7x3ZOofTTV3fwgEjsGbB6aKDkoxvvXguFYTdT%22%2C%22c1%22%3A%22Lenovo+A320    t%22%2C%22c2%22%3A%22umeng%22%2C%22device_global_id%22%3A%22Vs7YD5UMdXQDAES3wsPo18tN%22%2C%22c0%22%3A%22Lenovo%22%2C%22c6%22%3A%22350f7f27e685e967%22%2C%22package_name%22%3A%22com.ziipin.homeinn%22%2C%22c5%22%3A%220123456789ABCDEF%22%2C%22app_version%22%3A%225.8%22%2C%22sdk_version%22%3A20160215%2C%22c4%22%3Anull%2C%22c3%22%3A%22umeng%22%7D&api=mtop.push.device.createAndRegister&imsi=umeng"
-        rawCookie = "client=android; =a%7c%e6%9f%a5%e6%9f%a5%7c%e4%bd%a0%e5%a5%bd; pin=18999999999"
+        url = "http://ossweb-img.qq.com/images/clientpop/msgcenter/lol/send_json_lean_list.json?rid=0.39027754310518503\taHR0cDovL2xvbC5xcS5jb20vYWN0L2EyMDE1MDcwM21zZy9pbmRleC5odG0/em9uZWlkPTE0"
+        rawCookie = "RK=XBvnXSrvXq; eas_sid=g174t8Q8k398h4o7N0f6J0Q4d0; LW_uid=y1n4u8F8e4t3q43103w5s7Z3x8; ptisp=ctc; ptcz=b0f5743a1e90f918b5b50e952f34556fb516c862d560722dada5a7b151c0e666; pt2gguin=o0381315486; uin=o0381315486; skey=@N3RFhk3ig; IED_LOG_INFO2=userUin%3D381315486%26nickName%3D%2525E5%2525B0%25258F%2525E9%2525B2%25259C%2525E8%252582%252589%2525E4%2525B8%2525B6%26userLoginTime%3D1488651489; LW_sid=71Y4X8f8f695N1N4F8i9u8h1h5; pgv_pvid=8181822302; pgv_info=pgvReferrer=http://qt.qq.com/zhibo/lol_live.html&ssid=s9073689536"
         new BaseLibrary(AccountType.NETWORK).load()
         // cache = Whitelist.cache.get(Field.Cookie)
     }
