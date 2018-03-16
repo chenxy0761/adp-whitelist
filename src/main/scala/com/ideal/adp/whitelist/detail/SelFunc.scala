@@ -75,7 +75,7 @@ class SelFunc extends LogicGenerable {
 
     terminalWhitelist("-1428352528", AccountType.MAC, Field.Url, "irs01.com", gen feature ("mac1") urlDecode())
 
-    terminalWhitelist("301528740", AccountType.MDN, Field.Url, "mb.hd.sohu.com.cn", gen feature ("passport") urlDecode() regex())
+    //terminalWhitelist("301528740", AccountType.MDN, Field.Url, "mb.hd.sohu.com.cn", gen feature ("passport") urlDecode() regex())
 
     terminalWhitelist("301528740", AccountType.MDN, Field.Url, "mb.hd.sohu.com.cn", gen feature ("passport") urlDecode() jsonToMap() find ("c4"))
 

@@ -8,5 +8,8 @@ class Jumei extends LogicGenerable {
         networkWhitelist("id120", urls, gen feature("cookie_uid"))
         networkWhitelist("id121", urls, gen feature("uid"))
         networkWhitelist("id122", urls, gen feature("nickname"))
+        
+        terminalWhitelist("82669811", AccountType.MAC,Field.Cookie,"www.jumei.com", gen feature ("mac") )
+	
     }
 }

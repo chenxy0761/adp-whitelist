@@ -11,6 +11,7 @@ class Dangdang extends LogicGenerable {
         networkWhitelist("id101", url, gen feature("ddoy") urlDecode() stringToMap("&", "=") find("email"))
         networkWhitelist("id103", url, gen feature("ddoy") urlDecode() stringToMap("&", "=") find("uname"))
 
-        terminalWhitelist("1026018160", AccountType.MAC, Field.Url, "mcheckout.dangdang.com", gen feature("macaddress"))
-    }
+        terminalWhitelist("1026018160", AccountType.MAC,Field.Url,"mcheckout.dangdang.com", gen feature ("macaddress") )
+        terminalWhitelist("1543132582", AccountType.IMEI,Field.Url,"e.dangdang.com", gen feature ("deviceSerialNo") )
+	}
 }

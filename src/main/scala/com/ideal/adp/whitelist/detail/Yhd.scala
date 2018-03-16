@@ -4,7 +4,7 @@ import com.ideal.adp.whitelist.Field
 import com.ideal.adp.whitelist.Whitelist._
 import com.ideal.adp.whitelist.account.AccountType
 
-class YHD extends LogicGenerable {
+class Yhd extends LogicGenerable {
     override def load(): Unit = {
         val url = "yhd.com"
         networkWhitelist("id11", url, gen feature("yihaodian_uid"))
